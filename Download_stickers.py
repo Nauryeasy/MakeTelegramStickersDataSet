@@ -5,6 +5,8 @@ import json
 
 from config import *
 
+print("Made by NAURY with the help of everyone's favorite Internet search engines")
+
 try:
     with open('data/metadata.pkl', 'rb') as file:
         emojis = pickle.load(file)
