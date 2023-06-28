@@ -29,6 +29,8 @@ def download_sticker_pack(sticker_set_name):
         dir_path = f'data/{sticker_set_name}'
         os.mkdir(dir_path)
 
+        count = 0
+
         for sticker in sticker_set["stickers"]:
 
             emoji = sticker['emoji']
@@ -41,9 +43,16 @@ def download_sticker_pack(sticker_set_name):
 
             response = requests.get(file_url)
 
-            file_name = f"{dir_path}/{sticker['emoji']}.webp"
-            with open(file_name, "wb") as f:
-                f.write(response.content)
+            if COUNTER_NAME:
+                file_name = f"{dir_path}/{count}.{EXTENSION}"
+                with open(file_name, "wb") as f:
+                    f.write(response.content)
+                count += 1
+
+            else:
+                file_name = f"{dir_path}/{sticker['emoji']}.{EXTENSION}"
+                with open(file_name, "wb") as f:
+                    f.write(response.content)
 
         emojis[sticker_set_name] = emojis_list
     print(f'{sticker_set_name} is downloaded')
